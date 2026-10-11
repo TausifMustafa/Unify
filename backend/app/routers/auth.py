@@ -2,7 +2,7 @@
 #list of our imports
 import os
 from datetime import datetime, timedelta
-from typing import Optional
+from typing import Optional, Literal
 import uuid
 
 from fastapi import APIRouter, Depends, HTTPException, status
@@ -52,7 +52,7 @@ class RegisterRequest(BaseModel):
     first_name: str | None = None
     last_name: str | None = None
     password: str
-    role: models.UserRole = models.UserRole.student
+    role: Literal[models.UserRole.student] = models.UserRole.student
 
 
 class LoginRequest(BaseModel):
@@ -114,7 +114,7 @@ def register_user(payload: RegisterRequest, db: Session = Depends(get_db)):
         display_name=payload.display_name,
         first_name=payload.first_name,
         last_name=payload.last_name,
-        role=payload.role,
+        role=models.UserRole.student,
         password_hash=hash_password(payload.password),
     )
     #add to the database

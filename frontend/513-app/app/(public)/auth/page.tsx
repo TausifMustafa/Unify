@@ -147,7 +147,6 @@ export default function AuthPage() {
           first_name: firstName,
           last_name: lastName,
           password: regPassword,
-          role,
         }),
       });
     } catch (err: any) {
@@ -193,21 +192,23 @@ export default function AuthPage() {
               {tab === "login" ? "Welcome back" : "Create your account"}
             </h2>
 
-            <div className="min-w-[180px]">
-              <Select value={role} onValueChange={(v) => setRole(v as Role)}>
-                <SelectTrigger className="h-9 bg-background border-border text-foreground">
-                  <SelectValue placeholder="Account type" />
-                </SelectTrigger>
-                <SelectContent className="bg-card border-border">
-                  <SelectItem value="student" className="data-highlighted:bg-accent">
-                    Student account
-                  </SelectItem>
-                  <SelectItem value="organizer" className="data-highlighted:bg-accent">
-                    Organizer account
-                  </SelectItem>
-                </SelectContent>
-              </Select>
-            </div>
+            {tab === "login" && (
+              <div className="min-w-[180px]">
+                <Select value={role} onValueChange={(v) => setRole(v as Role)}>
+                  <SelectTrigger className="h-9 bg-background border-border text-foreground">
+                    <SelectValue placeholder="Account type" />
+                  </SelectTrigger>
+                  <SelectContent className="bg-card border-border">
+                    <SelectItem value="student" className="data-highlighted:bg-accent">
+                      Student account
+                    </SelectItem>
+                    <SelectItem value="organizer" className="data-highlighted:bg-accent">
+                      Organizer account
+                    </SelectItem>
+                  </SelectContent>
+                </Select>
+              </div>
+            )}
           </div>
         </CardHeader>
 
